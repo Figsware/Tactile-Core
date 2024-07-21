@@ -1,0 +1,16 @@
+{
+    "name": "Tactile.Core.Editor",
+    "rootNamespace": "Tactile.Core",
+    "references": [
+        "GUID:c30243379fb0c4cc39b4524bf3c3d271"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

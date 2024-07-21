@@ -1,0 +1,15 @@
+{
+  "name": "com.figsware.tactile.core",
+  "version": "0.1.0",
+  "displayName": "Tactile Core",
+  "description": "Core functions, types, and editors for Tactile",
+  "unity": "2019.1",
+  "unityRelease": "0b5",
+  "documentationUrl": "https://example.com/",
+  "changelogUrl": "https://example.com/changelog.html",
+  "licensesUrl": "https://example.com/licensing.html",
+  "author": {
+    "name": "Figsware"
+  },
+  "type": "library"
+}
