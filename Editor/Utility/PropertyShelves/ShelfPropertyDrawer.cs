@@ -5,22 +5,21 @@ namespace Tactile.Core.Editor.Utility.PropertyShelves
 {
     public abstract class ShelfPropertyDrawer : PropertyDrawer
     {
-        protected ShelfGroup Group = new();
-
+        protected abstract IShelf Shelf { get; }
+        
         public override void OnGUI(Rect rect, SerializedProperty property, GUIContent label)
         {
-            Group.Render(rect, property, label);
+            Shelf.Render(rect, property, label);
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            return Group.GetHeight(property, label);
+            return Shelf.GetHeight(property, label);
         }
+    }
 
-        protected T AddShelf<T>(T shelf) where T : IShelf
-        {
-            Group.AddShelf(shelf);
-            return shelf;
-        }
+    public abstract class ShelfPropertyDrawer<T> : ShelfPropertyDrawer where T : IShelf
+    {
+        protected T TShelf => (T)Shelf;
     }
 }

@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace Tactile.Core.Editor.Utility.PropertyShelves
 {
-    public class ShelfController: IShelf
+    public class ShelfVisibilityController: IShelf
     {
         public readonly IShelf Shelf;
         public bool Visible;
         
-        public ShelfController(IShelf shelf, bool startingVisibility = true)
+        public ShelfVisibilityController(IShelf shelf, bool startingVisibility = true)
         {
             Shelf = shelf;
             Visible = startingVisibility;
@@ -28,15 +28,15 @@ namespace Tactile.Core.Editor.Utility.PropertyShelves
         public void ToggleVisible() => Visible = !Visible;
     }
 
-    public class ShelfController<T>: ShelfController where T : IShelf
+    public class ShelfVisibilityController<T>: ShelfVisibilityController where T : IShelf
     {
         public T TShelf => (T)Shelf;
         
-        public ShelfController(T shelf, bool startingVisibility = true) : base(shelf, startingVisibility)
+        public ShelfVisibilityController(T shelf, bool startingVisibility = true) : base(shelf, startingVisibility)
         {
             
         }
 
-        public static implicit operator T(ShelfController<T> shelfController) => shelfController.TShelf;
+        public static implicit operator T(ShelfVisibilityController<T> shelfVisibilityController) => shelfVisibilityController.TShelf;
     }
 }
