@@ -9,20 +9,23 @@ namespace Tactile.Core.Utility.Pool
     public class PrefabPool<TStrategy, TItem> : IPool<TItem>
         where TItem : Object where TStrategy : IPoolStrategy<TItem>, new()
     {
-        [SerializeField] private TStrategy strategy = new();
+        #region Serialized Variables
+
         [SerializeField] private TItem prefab;
         [SerializeField] private Transform spawnTransform;
         [SerializeField] private bool controlActiveStatus = true;
         [SerializeField] private bool destroyItem = true;
 
-        [Header("Events")]
-        public UnityEvent<TItem> onCreateItem = new();
+        [Header("Events")] public UnityEvent<TItem> onCreateItem = new();
         public UnityEvent<TItem> onGetItem = new();
         public UnityEvent<TItem> onReleaseItem = new();
         public UnityEvent<TItem> onDestroyItem = new();
 
-        private IPool<TItem> _pool;
+        [SerializeField] private TStrategy strategy = new();
 
+        #endregion
+
+        private IPool<TItem> _pool;
         private readonly PoolItemHandlers<TItem> _handlers;
 
         public PrefabPool()
@@ -42,8 +45,9 @@ namespace Tactile.Core.Utility.Pool
                 _ => null
             };
             gameObject?.SetActive(active);
+            gameObject?.transform.SetAsLastSibling();
         }
-        
+
         #region Pool Item Handlers
 
         private TItem CreateItem()
@@ -52,7 +56,7 @@ namespace Tactile.Core.Utility.Pool
             {
                 throw new ArgumentException("There is no prefab for this pool to create!");
             }
-            
+
             var item = Object.Instantiate(prefab, spawnTransform);
             onCreateItem.Invoke(item);
 
@@ -100,6 +104,5 @@ namespace Tactile.Core.Utility.Pool
     [Serializable]
     public class PrefabPool<TItem> : PrefabPool<HybridPoolStrategy<TItem>, TItem> where TItem : Object
     {
-    
     }
 }
